@@ -33,11 +33,12 @@
     }];
     
     // the card object
-    function Card(suit, letter, name) {
+    function Card(suit, letter, name, priority) {
       return {
         suit: suit,
         letter: letter,
         name: name || letter,
+		priority: priority,
         displayName: (name || letter) + ' of ' + suit.name
       };
     }
@@ -116,31 +117,26 @@
       }
       
       // function to deal the top card
+	  //var arrCards = [];
       function dealOneCard() {
+		  //arrCards.push(deck.cards.shift());
         return deck.cards.shift();
       }
       
       // function to reset the cards to a new deck in order
       function reset() {
         deck.cards = [];
+		//arrCards = [];
         suits.forEach(function(suit) {
-          deck.cards.push(Card(suit, 'A', 'Ace'));
+          deck.cards.push(Card(suit, 'A', 'Ace', 14));
           for (var i = 2; i <= 10; i++) {
-            deck.cards.push(Card(suit, i+''));
+            deck.cards.push(Card(suit, i+'', '', i));
           }
-          deck.cards.push(Card(suit, 'J', 'Jack'));
-          deck.cards.push(Card(suit, 'Q', 'Queen'));
-          deck.cards.push(Card(suit, 'K', 'King'));
+          deck.cards.push(Card(suit, 'J', 'Jack', 11));
+          deck.cards.push(Card(suit, 'Q', 'Queen', 12));
+          deck.cards.push(Card(suit, 'K', 'King', 13));
         });
       }
-	  
-	  //Sort deck of cards
-	  function sort() {
-		  var cards = [];		  
-		  vm.dealt.forEach(function(deal) {
-		  	  console.log(deal);
-		  });
-	  }
       
       // returning the public interface for Deck object
       return deck;
